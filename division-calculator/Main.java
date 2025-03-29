@@ -15,7 +15,6 @@ public class Main {
 
       System.out.printf("Quotient: %d\n", quotient);
       System.out.printf("Remainder: %d\n", remainder);
-
     }
   }
 }
