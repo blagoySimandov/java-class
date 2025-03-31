@@ -3,6 +3,7 @@ import java.util.HashMap;
 
 public class Main {
   public static void main(String[] args) {
+    System.out.println("Enter string:");
     try (Scanner scanner = new Scanner(System.in)) {
 
       String inputStr = scanner.nextLine();

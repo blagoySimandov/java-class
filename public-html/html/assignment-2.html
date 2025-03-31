@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Java Assignment 2 Report</title>
+    <!-- Add Prism CSS and JS for syntax highlighting -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css"
+    />
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #0066cc;
+        padding-bottom: 20px;
+      }
+
+      h1 {
+        color: #0066cc;
+        margin-bottom: 10px;
+      }
+
+      h2 {
+        color: #0066cc;
+        margin-top: 30px;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+      }
+
+      h3 {
+        margin-top: 20px;
+        color: #444;
+      }
+
+      .author-info {
+        font-style: italic;
+        color: #666;
+      }
+
+      /* Code blocks styling */
+      pre {
+        border-radius: 5px;
+        overflow-x: auto;
+        margin: 1em 0;
+      }
+
+      code {
+        font-family: "Fira Code", "Courier New", Courier, monospace;
+      }
+
+      /* Remove background from operators */
+      .token.operator,
+      .token.entity,
+      .token.url,
+      .language-css .token.string,
+      .style .token.string {
+        background: transparent !important;
+      }
+
+      .image-container {
+        margin: 20px 0;
+        text-align: center;
+      }
+
+      img {
+        max-width: 100%;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      
+      .report-image {
+        max-height: 600px;
+        object-fit: contain;
+      }
+
+      .caption {
+        font-style: italic;
+        margin-top: 10px;
+        color: #666;
+        font-size: 0.9em;
+      }
+
+      section {
+        margin-bottom: 40px;
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      }
+
+      .coffee-emoji {
+        font-size: 1.5em;
+      }
+      
+      .print-note {
+        font-size: 0.85em;
+        color: #666;
+        margin-top: 5px;
+        font-style: italic;
+      }
+
+      .part-heading {
+        background-color: #0066cc;
+        color: #ffffff;
+        padding: 10px 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+      
+      .part-heading h2 {
+        color: #ffffff;
+        margin: 0;
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .code-section,
+      .output-section,
+      .flowchart-section {
+        margin-top: 20px;
+      }
+      
+      /* Print-specific styles */
+      @media print {
+        body {
+          background-color: white;
+          margin: 0;
+          padding: 15px;
+          max-width: 100%;
+        }
+        
+        header button {
+          display: none; /* Hide print button when printing */
+        }
+        
+        section {
+          page-break-inside: avoid !important;
+          break-inside: avoid !important;
+          box-shadow: none;
+          border: 1px solid #eee;
+          margin-bottom: 30px;
+          padding-bottom: 20px;
+        }
+        
+        .part-heading {
+          background-color: #f0f8ff !important;
+          border: 1px solid #0066cc;
+          color: #0066cc !important;
+          border-left: 5px solid #0066cc;
+          print-color-adjust: exact;
+          -webkit-print-color-adjust: exact;
+        }
+        
+        .part-heading h2 {
+          color: #0066cc !important;
+          print-color-adjust: exact;
+          -webkit-print-color-adjust: exact;
+        }
+        
+        img {
+          max-width: 80%;
+          height: auto !important;
+          page-break-inside: avoid !important;
+          break-inside: avoid !important;
+          box-shadow: none;
+          margin: 15px auto;
+          display: block;
+        }
+        
+        .flowchart-section img {
+          max-height: 500px;
+          object-fit: contain;
+        }
+        
+        pre {
+          border: 1px solid #ddd;
+          page-break-inside: avoid !important;
+          break-inside: avoid !important;
+          overflow-x: hidden;
+          white-space: pre-wrap;
+          max-width: 100%;
+          background-color: #f8f8f8 !important;
+          padding: 10px;
+          font-size: 10pt !important;
+        }
+        
+        code {
+          font-size: 0.8em;
+          word-wrap: break-word;
+          white-space: pre-wrap;
+          font-family: "Courier New", Courier, monospace !important;
+          color: #000 !important;
+        }
+        
+        .code-section {
+          page-break-inside: avoid !important;
+          break-inside: avoid !important;
+        }
+        
+        footer {
+          margin-top: 30px;
+          text-align: center;
+          position: running(footer);
+        }
+        
+        /* Force each major section to start on a new page */
+        section {
+          page-break-before: always;
+        }
+        
+        /* First section doesn't need page break before */
+        section:first-of-type {
+          page-break-before: auto;
+        }
+        
+        /* Add page numbers */
+        @page {
+          size: A4;
+          margin: 1.5cm;
+          @bottom-right {
+            content: "Page " counter(page) " of " counter(pages);
+          }
+          @bottom-center {
+            content: element(footer);
+          }
+        }
+        
+        /* Fix for code highlighting in print */
+        .token.comment,
+        .token.prolog,
+        .token.doctype,
+        .token.cdata,
+        .token.punctuation,
+        .token.property,
+        .token.tag,
+        .token.boolean,
+        .token.number,
+        .token.constant,
+        .token.symbol,
+        .token.deleted,
+        .token.selector,
+        .token.attr-name,
+        .token.string,
+        .token.char,
+        .token.builtin,
+        .token.inserted,
+        .token.operator,
+        .token.entity,
+        .token.url,
+        .token.atrule,
+        .token.attr-value,
+        .token.keyword,
+        .token.function,
+        .token.class-name,
+        .token.regex,
+        .token.important,
+        .token.variable {
+          color: black !important;
+          background: none !important;
+          text-shadow: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <span class="coffee-emoji">☕</span>
+      <h1>Java Assignment 2 - Report</h1>
+      <div class="button-container">
+        <button onclick="window.print()" style="padding: 8px 15px; background-color: #0066cc; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px;">Print Report</button>
+        <p class="print-note">(For best results, enable background graphics in print settings)</p>
+      </div>
+    </header>
+
+    <section id="part1">
+      <div class="part-heading">
+        <h2>Program 1: Alphabetical Names</h2>
+      </div>
+
+      <div class="code-section">
+        <h3>Code implementation:</h3>
+        <pre><code class="language-java">
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class Main {
+  public static void main(String[] args) {
+    try (Scanner scanner = new Scanner(System.in)) {
+      ArrayList<String> names = new ArrayList<String>(10);
+      for (int i = 0; i < 10; i++) {
+        names.add(scanner.nextLine());
+          }
+      names.sort((String s1, String s2) -> s1.compareTo(s2));
+      names.forEach(s -> System.out.println(s));
+    }
+  }
+}
+        </code></pre>
+      </div>
+
+      <div class="flowchart-section">
+        <h3>Flow chart:</h3>
+        <div class="image-container">
+          <img src="/static/assignment2-q1-flowchart.png" alt="Alphabetical Names Flowchart" class="report-image" />
+          <p class="caption">Figure 1: Flowchart for Alphabetical Names Program</p>
+        </div>
+      </div>
+
+      <div class="output-section">
+        <h3>Screenshot of output:</h3>
+        <div class="image-container">
+          <img src="/static/assignment2-q1-output.png" alt="Alphabetical Names Output" class="report-image" />
+          <p class="caption">Figure 2: Output of the Alphabetical Names Program</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="part2">
+      <div class="part-heading">
+        <h2>Program 2: Division Calculator</h2>
+      </div>
+
+      <div class="code-section">
+        <h3>Code implementation:</h3>
+        <pre><code class="language-java">
+import java.util.Scanner;
+
+public class Main {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    try (scanner) {
+      System.out.println("Input dividend: ");
+      int divident = scanner.nextInt();
+
+      System.out.println("Input divisor: ");
+      int divisor = scanner.nextInt();
+
+      int quotient = divident / divisor;
+      int remainder = divident % divisor;
+
+      System.out.printf("Quotient: %d\n", quotient);
+      System.out.printf("Remainder: %d\n", remainder);
+    }
+  }
+}
+        </code></pre>
+      </div>
+
+      <div class="flowchart-section">
+        <h3>Flow chart:</h3>
+        <div class="image-container">
+          <img src="/static/assignment2-q2-flowchart.png" alt="Division Calculator Flowchart" class="report-image" />
+          <p class="caption">Figure 3: Flowchart for Division Calculator Program</p>
+        </div>
+      </div>
+
+      <div class="output-section">
+        <h3>Screenshot of output:</h3>
+        <div class="image-container">
+          <img src="/static/assignment2-q2-output.png" alt="Division Calculator Output" class="report-image" />
+          <p class="caption">Figure 4: Output of the Division Calculator Program</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="part3">
+      <div class="part-heading">
+        <h2>Program 3: Power Calculator</h2>
+      </div>
+
+      <div class="code-section">
+        <h3>Code implementation:</h3>
+        <pre><code class="language-java">
+import java.util.Scanner;
+
+public class Main {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    try (scanner) {
+      System.out.println("Input number: ");
+      double num = scanner.nextDouble();
+
+      System.out.println("Input power: ");
+      double power = scanner.nextDouble();
+
+      double result = Math.pow(num, power);
+      System.out.println("Result: " + result);
+    } catch (Exception e) {
+      System.out.println("Unexpected error: " + e);
+    }
+  }
+}
+        </code></pre>
+      </div>
+
+      <div class="flowchart-section">
+        <h3>Flow chart:</h3>
+        <div class="image-container">
+          <img src="/static/assignment2-q3-flowchart.png" alt="Power Calculator Flowchart" class="report-image" />
+          <p class="caption">Figure 5: Flowchart for Power Calculator Program</p>
+        </div>
+      </div>
+
+      <div class="output-section">
+        <h3>Screenshot of output:</h3>
+        <div class="image-container">
+          <img src="/static/assignment2-q3-ouput.png" alt="Power Calculator Output" class="report-image" />
+          <p class="caption">Figure 6: Output of the Power Calculator Program</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="part4">
+      <div class="part-heading">
+        <h2>Program 4: Matrix Addition</h2>
+      </div>
+
+      <div class="code-section">
+        <h3>Code implementation:</h3>
+        <pre><code class="language-java">
+import java.util.Scanner;
+
+public class Main {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    try (scanner) {
+      int[][] m1 = new int[3][3];
+      int[][] m2 = new int[3][3];
+      int[][] sum = new int[3][3];
+
+      System.out.println("Enter elements of first 3x3 matrix:");
+      for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+          m1[i][j] = scanner.nextInt();
+        }
+      }
+
+      System.out.println("Enter elements of second 3x3 matrix:");
+      for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+          m2[i][j] = scanner.nextInt();
+        }
+      }
+
+      // adding matrices
+      for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+          sum[i][j] = m1[i][j] + m2[i][j];
+        }
+      }
+
+      System.out.println("Sum of the matrices:");
+      for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+          System.out.print(sum[i][j] + " ");
+        }
+        System.out.println();
+      }
+    }
+  }
+}
+        </code></pre>
+      </div>
+
+      <div class="flowchart-section">
+        <h3>Flow chart:</h3>
+        <div class="image-container">
+          <img src="/static/assignment2-q4-flowchart.png" alt="Matrix Addition Flowchart" class="report-image" />
+          <p class="caption">Figure 7: Flowchart for Matrix Addition Program</p>
+        </div>
+      </div>
+
+      <div class="output-section">
+        <h3>Screenshot of output:</h3>
+        <div class="image-container">
+          <img src="/static/assignment2-q4-ouput.png" alt="Matrix Addition Output" class="report-image" />
+          <p class="caption">Figure 8: Output of the Matrix Addition Program</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p
+        style="
+          text-align: center;
+          margin-top: 40px;
+          color: #666;
+          font-size: 0.9em;
+        "
+      >
+        Java Assignment 2 Report | ☕ Java Programming
+      </p>
+    </footer>
+
+    <!-- Prism JS for syntax highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script>
+      // Add print button functionality with warning
+      document.addEventListener('DOMContentLoaded', function() {
+        const printButton = document.querySelector('button[onclick="window.print()"]');
+        if (printButton) {
+          printButton.addEventListener('click', function() {
+            alert('For best results, please enable "Background Graphics" in your browser print settings!');
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

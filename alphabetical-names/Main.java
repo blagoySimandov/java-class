@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class Main {
   public static void main(String[] args) {
     try (Scanner scanner = new Scanner(System.in)) {
+      System.out.println("Enter 10 arbitrary names:");
       ArrayList<String> names = new ArrayList<String>(10);
       for (int i = 0; i < 10; i++) {
         names.add(scanner.nextLine());

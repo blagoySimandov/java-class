@@ -25,6 +25,7 @@ public class Main {
     int num = 0;
 
     try (Scanner scanner = new Scanner(System.in)) {
+      System.out.println("Guess a number");
       num = scanner.nextInt();
     }
     boolean numberFound = false;

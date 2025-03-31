@@ -8,14 +8,13 @@ public class Main {
       String word1 = scanner.nextLine();
       System.out.println("Type in the second word to check with");
       String word2 = scanner.nextLine();
-      word1 = sortString(word1);
-      word2 = sortString(word2);
-      if (word1.equals(word2)) {
+      String wordSorted1 = sortString(word1);
+      String wordSorted2 = sortString(word2);
+      if (wordSorted1.equals(wordSorted2)) {
         System.out.println(word1 + " is an anagram of " + word2);
         return;
       }
       System.out.println(word1 + " is not an anagram of " + word2);
-
     }
   }
 
